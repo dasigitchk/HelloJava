@@ -12,7 +12,6 @@ public class BoardDAO {
 			return instance;
 		}
 	
-	
 	Scanner scn = new Scanner(System.in);
 	Board[] myBoards = new Board[100];
 
