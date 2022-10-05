@@ -8,4 +8,5 @@ public interface EmployeeService {
 	public void input();
 	public String search(int employeeId); // 사원아이디에 이름 반환.
 	public void print(); // 전체사원정보 출력.
+	public int searchSalary(int employeeId); //사원번호에 맞는 급여 반환.
 }
