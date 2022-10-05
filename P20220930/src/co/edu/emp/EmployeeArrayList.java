@@ -11,11 +11,11 @@ public class EmployeeArrayList implements EmployeeService{
 	}
 
 	@Override
-	public String serach(int employeeId) {
-		return null;
+	public void print() {
 	}
 
 	@Override
-	public void print() {
+	public String search(int employeeId) {
+		return null;
 	}
 }
