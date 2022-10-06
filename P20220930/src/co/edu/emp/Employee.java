@@ -13,8 +13,8 @@ public class Employee {
 	// 생성자.
 	public Employee() {
 		// 기본생성자.
-		this.deptId = 30;
-		this.deptName = "영업";
+//		this.deptId = 30;
+//		this.deptName = "영업";
 	}
 
 	// 4개 있는 생성자.
