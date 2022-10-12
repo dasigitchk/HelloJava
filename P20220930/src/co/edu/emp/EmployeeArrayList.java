@@ -51,10 +51,8 @@ public class EmployeeArrayList implements EmployeeService {
 		list.add(new Employee(eId, name, deptid, sal, email));
 	}
 
-	@Override
-<<<<<<< HEAD
-	public void print() {
-=======
+	public void print1() {}
+
 	public String search(int employeeId) {
 		String result = null;
 //		for (int i = 0; i < list.size(); i++) {
@@ -71,20 +69,18 @@ public class EmployeeArrayList implements EmployeeService {
 		}
 		return result;
 	}
-
+	
 	public void validDept(int dept) throws InvalidDeptException {
 		int validDept = dept % 10;
 		if (validDept != 0 || dept > 30) {
 			throw new InvalidDeptException("잘못된 부서정보입니다.");
 		}
->>>>>>> branch 'master' of https://github.com/dasigitchk/HelloJava.git
+
 	}
 
-	@Override
-<<<<<<< HEAD
-	public String search(int employeeId) {
+	public String search1(int employeeId) {
 		return null;
-=======
+	}
 	public void print() {
 		System.out.println("사원번호 	    이름      급여   ");
 		System.out.println("=========================");
@@ -93,7 +89,7 @@ public class EmployeeArrayList implements EmployeeService {
 					list.get(i).getSalary());
 		}
 	}
-
+	
 	@Override
 	public int searchSalary(int employeeId) {
 		int result = 0;
@@ -118,6 +114,5 @@ public class EmployeeArrayList implements EmployeeService {
 			}
 		}
 		return result;
->>>>>>> branch 'master' of https://github.com/dasigitchk/HelloJava.git
 	}
 }
