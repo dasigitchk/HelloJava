@@ -1,4 +1,4 @@
-package co.edu.board;
+package co.educationcenter;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,9 +16,7 @@ public class DAO {
 	// Connection 반환 getConnect
 	public Connection getConnect() {
 		try {
-			//드라이버 객채화
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			//DB와 연결
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr"); // url/ 계정/ pw
 			System.out.println("연결성공");
 		} catch (Exception e) {
