@@ -6,14 +6,23 @@ public class Board {
 	private int boardNum;
 	private String title;
 	private String content;
+	private SimpleDateFormat date;
 	private String writer;
 	private int count;
 	
-	Board( int boardNum, String title, String content,String writer){
+	Board( int boardNum, String title, String content,String writer,SimpleDateFormat date){
 		this.boardNum = boardNum;
-		this.title = title;
 		this.content = content;
 		this.writer = writer;
+		this.date = date;
+	}
+
+	public SimpleDateFormat getDate() {
+		return date;
+	}
+
+	public void setDate(SimpleDateFormat date) {
+		this.date = date;
 	}
 
 	public int getBoardNum() {
