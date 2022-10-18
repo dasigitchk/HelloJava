@@ -136,5 +136,4 @@ public class eduCenterDAO extends DAO {
 	}
 	
 	//회원정보수정
-	public void 
 }// end of class
