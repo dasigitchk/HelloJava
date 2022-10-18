@@ -5,16 +5,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 
-public class MailScreen extends JFrame {
+import co.gui.MailScreen.MyActionListener;
 
+public class SmsScreen extends JFrame{
 	Dimension lbl1 = new Dimension(65, 15); // 너비,높이
 	Dimension lbl2 = new Dimension(40, 20);
 
@@ -23,11 +18,10 @@ public class MailScreen extends JFrame {
 	JTextField fromTxt, toTxt, subjectTxt; // 텍스트 필드.
 	JTextArea contentTxt;
 	JButton send, cancel;
-
-	MailApp app = new MailApp();
-
-	public MailScreen() {
-		setTitle("메일 보내기 UI");
+	
+	SmsApp app = new SmsApp();
+	public SmsScreen() {
+		setTitle("SMS 보내기 UI");
 		setSize(340, 300);
 		setLayout(new BorderLayout());
 		// panel
@@ -44,7 +38,7 @@ public class MailScreen extends JFrame {
 		subjectLbl.setPreferredSize(lbl1);
 		contentLbl.setPreferredSize(lbl2);
 		// textfield
-		toTxt = new JTextField(23);
+		toTxt = new JTextField(22);
 		fromTxt = new JTextField(22);
 		subjectTxt = new JTextField(22);
 		contentTxt = new JTextArea(8, 22);
@@ -60,8 +54,8 @@ public class MailScreen extends JFrame {
 		center.add(fromTxt);
 		center.add(toLbl);
 		center.add(toTxt);
-		center.add(subjectLbl);
-		center.add(subjectTxt);
+//		center.add(subjectLbl);
+//		center.add(subjectTxt);
 		center.add(contentLbl);
 		center.add(contentTxt);
 
@@ -88,12 +82,10 @@ public class MailScreen extends JFrame {
 				System.out.println("보내기 버튼 actionPerfromed.");
 				String from = fromTxt.getText(); //
 				String to = toTxt.getText();
-				String subject = subjectTxt.getText();
 				String content = contentTxt.getText();
 				
-				if(app.semdMail(from, to, subject, content).equals("Success")) {
+				if(app.sendSms(to, from, content).equals("Success")) {
 					// 콘솔에 "성공"; -> 값을 지워주도록.
-					subjectTxt.setText(" ");
 					fromTxt.setText(" ");
 					 toTxt.setText(" ");
 					 contentTxt.setText(" ");
@@ -107,9 +99,8 @@ public class MailScreen extends JFrame {
 			}
 		}
 	}
-
 	// 화면시작.
-	public static void main(String[] args) {
-		new MailScreen();
-	}
+		public static void main(String[] args) {
+			new SmsScreen();
+		}
 }

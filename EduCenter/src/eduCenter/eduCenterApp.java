@@ -22,7 +22,7 @@ public class eduCenterApp {
 				System.out.println("로그인 성공");
 			
 			while (true) {
-				System.out.println("1.회원등록 2.회원삭제 3.회원조회 4.상세조회 9.종료");
+				System.out.println("1.회원등록 2.회원삭제 3.회원조회 4.상세조회 5.회원정보수정 9.종료");
 				int menu = Integer.parseInt(scn.nextLine());
 				if (menu == 1) {
 					app.add();

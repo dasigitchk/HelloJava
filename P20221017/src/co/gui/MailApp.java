@@ -67,4 +67,9 @@ public class MailApp {
 		}
 	}
 
+	public Object semdMail(String from, String to, String subject, String content) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
