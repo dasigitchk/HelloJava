@@ -11,14 +11,8 @@ public class eduCenterApp {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		eduCenterDAO app = new eduCenterDAO();
 	  loop: while (true) {
-			System.out.println("=====로그인 화면=====");
-			System.out.print("아이디: ");
-			String id = scn.nextLine();
-			System.out.print("비밀번호: ");
-			String pwd = scn.nextLine();
-			
 			//아이디,비밀번호 DB비교
-			if(app.login(id, pwd) == 1) {
+			if(app.login() == 1) {
 				System.out.println("로그인 성공");
 			
 			while (true) {
@@ -32,6 +26,8 @@ public class eduCenterApp {
 					app.searchAll();
 				} else if (menu == 4) {
 					app.searchMem();
+				}else if (menu == 5) {
+					app.update();
 				} else if (menu == 9) {
 					System.out.println("프로그램을 종료합니다.");
 					break loop;
