@@ -291,5 +291,10 @@ public class eduCenterDAO extends DAO {
 			}
 			else System.out.println("올바른 메뉴번호가 아닙니다.");
 		}
-	}
+	}//end of cancelLect()
+	
+	//상담신청
+	
+	
+	//회원정보수정
 }// end of class
