@@ -13,6 +13,7 @@ public class Members {
 	
 	//생성자
 	Members(String name, int idNum, String addr, String tel, String lect){
+			super();
 			this.name = name;
 			this.idNum = idNum;
 			this.tel = tel;
@@ -20,6 +21,12 @@ public class Members {
 			this.lect = lect;
 	}
 	
+	//로그인용 데이터 임시저장용 생성자.
+	Members(String name, int idNum){
+		super();
+		this.name = name;
+		this.idNum = idNum;
+}
 	
 	//getter & setter
 	public int getIdNum() {
