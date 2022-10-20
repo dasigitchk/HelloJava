@@ -1,6 +1,5 @@
 package eduCenter;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
@@ -10,16 +9,14 @@ public class eduCenterApp {
 	public static void main(String[] args) throws IOException {
 		Scanner scn = new Scanner(System.in);
 		eduCenterDAO app = new eduCenterDAO();
-
 		loop: while (true) {
 			System.out.println("1.교직원 로그인 2.회원 로그인");
 			System.out.print("메뉴 선택: ");
 			int menu = Integer.parseInt(scn.nextLine());
-
 			if (menu == 1) {
 				if (app.login(menu) == 1) {
 					while (true) {
-						System.out.println("1.회원등록 2.회원삭제 3.회원조회 4.상세조회 5.회원정보수정 9.종료");
+						System.out.println("1.회원등록 2.회원삭제 3.회원조회 4.상세조회 5.회원정보수정 6.메일발송 9.종료");
 						int menu2 = Integer.parseInt(scn.nextLine());
 						if (menu2 == 1) {
 							app.add();
@@ -31,6 +28,8 @@ public class eduCenterApp {
 							app.searchMem();
 						} else if (menu2 == 5) {
 							app.update();
+						} else if (menu2 == 6) {
+							app.sendMail();
 						} else if (menu2 == 9) {
 							System.out.println("프로그램을 종료합니다.");
 							break loop;
@@ -41,17 +40,15 @@ public class eduCenterApp {
 				if (app.login(menu) == 2) {
 					System.out.println("로그인 성공");
 					while (true) {
-						System.out.println("1.수강신청 2.수강취소 3.강의전체조회 4.강의상세조회 5.회원정보수정 9.종료");
+						System.out.println("1.수강신청 2.수강취소 3.강의전체조회 4.회원정보수정 9.종료");
 						int menu3 = Integer.parseInt(scn.nextLine());
 						if (menu3 == 1) {
-	
+							app.appLect();
 						} else if (menu3 == 2) {
 							app.cancelLect();
 						} else if (menu3 == 3) {
 							app.searchAllLect();
 						} else if (menu3 == 4) {
-
-						} else if (menu3 == 5) {
 							app.update();
 						} else if (menu3 == 9) {
 							System.out.println("프로그램을 종료합니다.");

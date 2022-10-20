@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="C:/Dev/activation-1.1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Dev/javaSDK-2.2.jar"/>
 	<classpathentry kind="lib" path="C:/Dev/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Dev/MailApp.java"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

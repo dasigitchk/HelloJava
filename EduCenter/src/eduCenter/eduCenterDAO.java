@@ -10,6 +10,7 @@ public class eduCenterDAO extends DAO {
 
 	ArrayList<Members> members = new ArrayList<>();
 	ArrayList<Staffs> staffs = new ArrayList<>();
+	MailApp mail = new MailApp();
 	Scanner scn = new Scanner(System.in);
 
 	// 회원등록
@@ -22,11 +23,13 @@ public class eduCenterDAO extends DAO {
 		String addr = scn.nextLine();
 		System.out.print("전화번호: ");
 		String tel = scn.nextLine();
+		System.out.print("이메일: ");
+		String email = scn.nextLine();
 		System.out.print("신청강의명: ");
 		String lect = scn.nextLine();
 		getConnect();
 		String sql = "insert into Members (member_num, member_name, id_number, member_address,"
-				+ " member_tel, member_lecture, reg_date) " + " values(seq_member.nextval, ?, ?, ?, ?, ?, sysdate )";
+				+ " member_tel, member_lecture, reg_date, email) " + " values(seq_member.nextval, ?, ?, ?, ?, ?, sysdate,? )";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, name);
@@ -34,6 +37,7 @@ public class eduCenterDAO extends DAO {
 			psmt.setString(3, addr);
 			psmt.setString(4, tel);
 			psmt.setString(5, lect);
+			psmt.setString(6, email);
 			psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -102,7 +106,7 @@ public class eduCenterDAO extends DAO {
 						System.out.println("회원번호: " + rs.getInt("member_num") + ", 이름: " + rs.getString("member_name")
 								+ ", 주민번호: " + rs.getString("id_number") + ", 주소: " + rs.getString("member_address")
 								+ ", 전화번호: " + rs.getString("member_tel") + ", 수강강의: " + rs.getString("member_lecture")
-								+ ", 회원가입일시: " + rs.getString("reg_date") + "\n");
+								+ ", 회원가입일시: " + rs.getString("reg_date") + ", 이메일: "+rs.getString("email")+"\n");
 						break loop;
 					}
 				} catch (SQLException e) {
@@ -200,9 +204,11 @@ public class eduCenterDAO extends DAO {
 					String newTel = scn.nextLine();
 					System.out.println("수정할강의명 입력: ");
 					String newLect = scn.nextLine();
+					System.out.println("수정할이메일 입력: ");
+					String newEmail = scn.nextLine();
 					getConnect();
 					String sql = "update Members set member_name = ? " + ", id_number = ?, member_address = ? "
-							+ ", member_tel = ?, member_lecture = ?";
+							+ ", member_tel = ?, member_lecture = ?, email = ?";
 					try {
 						psmt = conn.prepareStatement(sql);
 						psmt.setString(1, newName);
@@ -210,6 +216,7 @@ public class eduCenterDAO extends DAO {
 						psmt.setString(3, newAddr);
 						psmt.setString(4, newTel);
 						psmt.setString(5, newLect);
+						psmt.setString(6, newEmail);
 						psmt.executeUpdate();
 						System.out.println("수정완료.");
 						break loop;
@@ -224,7 +231,35 @@ public class eduCenterDAO extends DAO {
 			}
 		}
 	}
-
+	
+	//메일발송
+	public String sendMail() {
+		System.out.println("메일발송할 회원이름 입력: ");
+		String name = scn.nextLine();
+		System.out.println("메일제목: ");
+		String mailTitle = scn.nextLine();
+		System.out.println("메일내용: ");
+		String content = scn.nextLine();
+		getConnect();
+		String sql = "select email from members where member_name = ?";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, name);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				mail.sendMail("pokemdn@naver.com", rs.getString("email"), mailTitle, content);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			disconnect();
+		}
+		return null;
+		
+	}
+		
 	// 회원이름으로 조회
 	public int checkmember(String name) {
 		int result = 0;
@@ -248,7 +283,34 @@ public class eduCenterDAO extends DAO {
 
 	//수강신청
 	public void appLect() {
-		System.out.println("=======모집중인 수강목록=======");
+		System.out.println("=======모집중인 강의목록=======");
+		getConnect();
+		String sql = "selelct lect_name from lectures where recruit_state = '모집중'";
+		try {
+			psmt= conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				System.out.print("["+rs.getString("lect_name")+"], ");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		System.out.println("신청할 강의명을 입력하세요");
+		String lectName = scn.nextLine();
+		getConnect();
+		String sql2 = "update members set lect_name = ? where memeber_name = ?";
+		try {
+			psmt2 = conn.prepareStatement(sql);
+			psmt2.setString(1, members.get(0).getName());
+			int r = psmt2.executeUpdate();
+			System.out.println(r+"건 신청됨.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
 	}
 	
 	// 강의전체조회
