@@ -24,18 +24,30 @@ public class eduCenterDAO extends DAO {
 		String tel = scn.nextLine();
 		System.out.print("신청강의명: ");
 		String lect = scn.nextLine();
-
-		Members member = new Members(name, idNum, addr, tel, lect);
-		members.add(member);
-		dbInput(name, idNum, addr, tel, lect);
+		getConnect();
+		String sql = "insert into Members (member_num, member_name, id_number, member_address,"
+				+ " member_tel, member_lecture, reg_date) " + " values(seq_member.nextval, ?, ?, ?, ?, ?, sysdate )";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, name);
+			psmt.setInt(2, idNum);
+			psmt.setString(3, addr);
+			psmt.setString(4, tel);
+			psmt.setString(5, lect);
+			psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
 		System.out.println("등록이 완료되었습니다.");
 	}
 
 	// 회원삭제
 	public void delete() {
-		getConnect();
 		System.out.print("삭제할 회원의 이름을 입력하세요(취소는 9): ");
 		String name = scn.nextLine();
+		getConnect();
 		String sql = "delete from Members where member_name =?";
 
 		try {
@@ -53,28 +65,6 @@ public class eduCenterDAO extends DAO {
 		}
 	}
 
-	// DB저장
-	public void dbInput(String name, int idNum, String address, String tel, String lecture) {
-		conn = getConnect();
-		String sql = "insert into Members (member_num, member_name, id_number, member_address,"
-				+ " member_tel, member_lecture, reg_date) " + " values(seq_member.nextval, ?, ?, ?, ?, ?, sysdate )";
-		try {
-			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, name);
-			psmt.setInt(2, idNum);
-			psmt.setString(3, address);
-			psmt.setString(4, tel);
-			psmt.setString(5, lecture);
-
-			psmt.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			disconnect();
-		}
-	}
-
 	// 회원전체조회
 	public void searchAll() {
 		conn = getConnect();
@@ -83,8 +73,9 @@ public class eduCenterDAO extends DAO {
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery(sql);
 			while (rs.next()) {
-				System.out.println("회원번호: " + rs.getInt("member_num") + ", 이름: " + rs.getString("member_name")
-						+ ", 전화번호: " + rs.getString("member_tel") + ", 수강강의: " + rs.getString("member_lecture") + "\n");
+				System.out.println(
+						"[회원번호: " + rs.getInt("member_num") + ", 이름: " + rs.getString("member_name") + ", 전화번호: "
+								+ rs.getString("member_tel") + ", 수강강의: " + rs.getString("member_lecture") + "]\n");
 			}
 
 		} catch (SQLException e) {
@@ -100,7 +91,7 @@ public class eduCenterDAO extends DAO {
 			System.out.print("조회할 회원이름 입력: ");
 			String memName = scn.nextLine();
 			if (checkmember(memName) == 1) {
-				conn = getConnect();
+				getConnect();
 				String sql = "select * from Members where member_name = ? ";
 				try {
 					psmt = conn.prepareStatement(sql);
@@ -135,7 +126,7 @@ public class eduCenterDAO extends DAO {
 				System.out.print("비밀번호: ");
 				String pwd = scn.nextLine();
 
-				conn = getConnect();
+				getConnect();
 				String sql = "select staff_name from staff where staff_id = ? and staff_password = ? ";
 				try {
 					psmt = conn.prepareStatement(sql);
@@ -144,6 +135,7 @@ public class eduCenterDAO extends DAO {
 					rs = psmt.executeQuery();
 					if (rs.next()) {
 						result = 1;
+						System.out.println("로그인성공");
 						Staffs staff = new Staffs(id, pwd);
 						staffs.add(staff);
 						break;
@@ -163,7 +155,7 @@ public class eduCenterDAO extends DAO {
 				System.out.print("주민등록번호앞 6자리: ");
 				int idNum = Integer.parseInt(scn.nextLine());
 
-				conn = getConnect();
+				getConnect();
 				String sql = "select member_name from Members where member_name = ? and id_number = ? ";
 				try {
 					psmt = conn.prepareStatement(sql);
@@ -173,6 +165,7 @@ public class eduCenterDAO extends DAO {
 					if (rs.next()) {
 						Members member = new Members(name, idNum);
 						members.add(member);
+						System.out.println("로그인성공");
 						result = 2;
 						System.out.println();
 						break;
@@ -207,7 +200,7 @@ public class eduCenterDAO extends DAO {
 					String newTel = scn.nextLine();
 					System.out.println("수정할강의명 입력: ");
 					String newLect = scn.nextLine();
-					conn = getConnect();
+					getConnect();
 					String sql = "update Members set member_name = ? " + ", id_number = ?, member_address = ? "
 							+ ", member_tel = ?, member_lecture = ?";
 					try {
@@ -233,7 +226,7 @@ public class eduCenterDAO extends DAO {
 	}
 
 	// 회원이름으로 조회
-	private int checkmember(String name) {
+	public int checkmember(String name) {
 		int result = 0;
 		conn = getConnect();
 		String sql = "select * from Members where member_name = ? ";
@@ -253,13 +246,22 @@ public class eduCenterDAO extends DAO {
 		return result;
 	}
 
-	// 강의조회
+	//수강신청
+	public void appLect() {
+		System.out.println("=======모집중인 수강목록=======");
+	}
+	
+	// 강의전체조회
 	public void searchAllLect() {
 		getConnect();
 		String sql = "select * from lectures";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.executeQuery();
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				System.out.println("[분류: " + rs.getString("lect_cl") + ", 강의명: " + rs.getString("lect_name")//
+						+ ", 수업기간: " + rs.getString("lect_period") + ", 모집기간: " + rs.getString("recruit_period")+"]");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -288,13 +290,12 @@ public class eduCenterDAO extends DAO {
 				}
 			} else if (menu == 2) {
 				break;
-			}
-			else System.out.println("올바른 메뉴번호가 아닙니다.");
+			} else
+				System.out.println("올바른 메뉴번호가 아닙니다.");
 		}
-	}//end of cancelLect()
-	
-	//상담신청
-	
-	
-	//회원정보수정
+	}// end of cancelLect()
+
+	// 강의상세조회
+	public void detailOfLect() {
+	}
 }// end of class
