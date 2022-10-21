@@ -1,0 +1,4 @@
+601 홍길동 hong@email.com 2022-04-03 ST_MAN 5000
+602 이익균 lee@email.com 2000-01-01 IT_PROG 6000
+603 유산균 you@email.com 2022-05-04 SA_REP 7000
+604 김민기 kim@email.com 2022-03-04 ST_CLERK 8000

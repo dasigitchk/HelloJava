@@ -16,7 +16,7 @@ public class eduCenterApp {
 			if (menu == 1) {
 				if (app.login(menu) == 1) {
 					while (true) {
-						System.out.println("1.회원등록 2.회원삭제 3.회원조회 4.상세조회 5.회원정보수정 6.메일발송 9.종료");
+						System.out.println("1.회원등록 2.회원삭제 3.회원조회 4.상세조회 5.회원정보수정 6.메일발송 7. 9.종료");
 						int menu2 = Integer.parseInt(scn.nextLine());
 						if (menu2 == 1) {
 							app.add();
@@ -38,7 +38,6 @@ public class eduCenterApp {
 				} // end of menu == 1 if
 			} else if (menu == 2) {
 				if (app.login(menu) == 2) {
-					System.out.println("로그인 성공");
 					while (true) {
 						System.out.println("1.수강신청 2.수강취소 3.강의전체조회 4.회원정보수정 9.종료");
 						int menu3 = Integer.parseInt(scn.nextLine());

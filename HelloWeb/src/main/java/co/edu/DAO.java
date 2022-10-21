@@ -1,4 +1,4 @@
-package eduCenter;
+package co.edu;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,14 +11,14 @@ public class DAO {
 	Connection conn;
 	Statement stmt;
 	ResultSet rs;
-	PreparedStatement psmt, psmt2;
+	PreparedStatement psmt;
 
 	// Connection 반환 getConnect
 	public Connection getConnect() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.2:1521:xe", "hr", "hr"); // url/ 계정/ pw
-//			System.out.println("연결성공");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr"); // url/ 계정/ pw
+			System.out.println("연결성공");
 		} catch (Exception e) {
 			System.out.println("연결실패");
 		}
