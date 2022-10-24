@@ -1,4 +1,4 @@
-package co.edu;
+package co.edu.emp;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -84,7 +84,7 @@ public class EmpDAO extends DAO {
 		List<EmployeeVO> empList = new ArrayList<EmployeeVO>();
 		getConnect();
 		String sql = "select * from emp1" // 주석은 정렬시 흐트러지지않게하기위해
-				+ " where employee_id = decode(?, 0, employee_id, ?) " //
+				+ " where nvl(employee_id, 0) = decode(?, 0, nvl(employee_id, 0), ?)" //
 				+ " and first_name like '%'||?||'%' " // ||은 오라클에서 문장연결의기호
 				+ " and last_name like '%'||?||'%' " //
 				+ " and email like '%'||?||'%' " //

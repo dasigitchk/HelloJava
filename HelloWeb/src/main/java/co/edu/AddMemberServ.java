@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.edu.emp.EmpDAO;
+import co.edu.emp.EmployeeVO;
+
 
 @WebServlet({ "/addMemberServlet", "/addMember" })
 public class AddMemberServ extends HttpServlet {
@@ -18,7 +21,8 @@ public class AddMemberServ extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
+    //get 방식의 요청.
 	protected void doGet(HttpServletRequest request
 			, HttpServletResponse response)	throws ServletException, IOException {
 		
@@ -33,7 +37,7 @@ public class AddMemberServ extends HttpServlet {
 		String job_id = request.getParameter("job_id");
 		System.out.println(empId);
 
-		String sql = "insert into emp1 values(seq_nextval)  ";
+		String sql = "insert into emp1 values(seq_nextval)";
 		// 입력.
 		EmpDAO dao = new EmpDAO();
 		EmployeeVO emp = new EmployeeVO(0,null,lName,email,hire_date,job_id);
@@ -50,9 +54,13 @@ public class AddMemberServ extends HttpServlet {
 		out.print("직무: "+emp.getJobId());
 	
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	
+	// post 방식의 요청 시 실행.
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+//		doGet(request, response);
+		PrintWriter out = response.getWriter(); // 사용자의 브라우저(출력스트림 생성)
+		out.print("<h3>Post 방식의 요청</h3>");
 	}
 }

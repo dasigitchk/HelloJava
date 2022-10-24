@@ -1,4 +1,4 @@
-package co.edu;
+package co.edu.emp;
 
 public class EmployeeVO { // VO?
 	private int employeeId;
@@ -9,7 +9,8 @@ public class EmployeeVO { // VO?
 	private String jobId;
 
 	// 생성자
-	public EmployeeVO(int employeeId, String firstName, String lastName, String email, String hireDate, String jobId) {
+	public EmployeeVO(int employeeId, String firstName, String lastName//
+			, String email, String hireDate, String jobId) {
 		super();
 		this.employeeId = employeeId;
 		this.firstName = firstName;
@@ -18,7 +19,11 @@ public class EmployeeVO { // VO?
 		this.hireDate = hireDate;
 		this.jobId = jobId;
 	}
-
+	
+	public EmployeeVO(String jobId) {
+		this.jobId = jobId;
+	}
+	
 	// getter & setter
 	public int getEmployeeId() {
 		return employeeId;
