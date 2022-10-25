@@ -12,17 +12,17 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public void addMember(MemberVO vo) {
-		dao.memeberInsert(vo);
+		dao.memberInsert(vo);
 	}
 
 	@Override
 	public void modifyMember(MemberVO vo) {
-		dao.memeberUpdate(vo);
+		dao.memberUpdate(vo);
 	}
 
 	@Override
 	public void removeMember(String id) {
-		dao.memberdelete(id);
+		dao.memberDelete(id);
 	}
 
 	@Override
@@ -35,5 +35,10 @@ public class MemberServiceImpl implements MemberService{
 	public List<MemberVO> memberList() {
 		
 		return dao.memberList();
+	}
+
+	@Override
+	public MemberVO login(String id, String passwd) {
+		return dao.login(id, passwd);
 	}
 }

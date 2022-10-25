@@ -1,4 +1,4 @@
-package co.edu;
+package co.edu.control;
 
 import java.io.IOException;
 
@@ -6,16 +6,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class SecondImpl implements Command{
+import co.edu.common.Command;
+import co.edu.common.HttpUtil;
 
-	@Override
-	public void exec() {
-		System.out.println("SecondImp1() 실행됨.");
-	}
+public class MemberSearchForm implements Command {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	   // 화면open.
+		String id = req.getParameter("id");
+		
+		req.setAttribute("sid", id);
+		
+		HttpUtil.forward(req, resp, "memberView/memberSearch.jsp");
 		
 	}
 

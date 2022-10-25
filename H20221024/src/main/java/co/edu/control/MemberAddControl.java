@@ -22,8 +22,9 @@ public class MemberAddControl implements Command {
 		String pw = req.getParameter("passwd");
 		String nm = req.getParameter("name");
 		String ml = req.getParameter("email");
+		String auth = req.getParameter("resposibility");
 		
-		MemberVO vo = new MemberVO(id, pw, nm, ml);
+		MemberVO vo = new MemberVO(id, pw, nm, ml, auth);
 		
 		// DB입력처리
 		MemberService service = new MemberServiceImpl();

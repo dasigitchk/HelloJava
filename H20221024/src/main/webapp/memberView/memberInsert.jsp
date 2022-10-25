@@ -12,7 +12,7 @@
 	ID: <input type="text" name = "id"><br>
 	PW: <input type="password" name = "passwd"><br>
 	Name: <input type="text" name = "name"><br>
-	Mail: <input type="email" name="mail"><br>
+	Mail: <input type="email" name="email"><br>
 	<input type="submit" value="등록">
 	</form>
 </body>
