@@ -1,10 +1,12 @@
 package co.edu.common;
 
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Properties;
 
 public class DAO {
 	public Connection conn;
@@ -12,19 +14,29 @@ public class DAO {
 	public ResultSet rs;
 	public PreparedStatement psmt;
 
-	// Connection ë°˜í™˜ getConnect
+	// Connection ¹ÝÈ¯ getConnect
 	public Connection getConnect() {
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.2:1521:xe", "kch", "kch"); // url/ ê³„ì •/ pw
-//			System.out.println("ì—°ê²°ì„±ê³µ");
+			
+			Properties prop = new Properties();
+			prop.load(new FileReader("C:/Temp/database.properties"));
+			String driver = prop.getProperty("driver");
+			String url = prop.getProperty("url");
+			String id = prop.getProperty("user");
+			String pass = prop.getProperty("passwd");
+			
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, id, pass); // url/ ê³„ì •/ pw
+//			conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.2:1521:xe", "kch", "kch"); // url/ ê³„ì •/ pw
+//			System.out.println("¿¬°á¼º°ø");
 		} catch (Exception e) {
-			System.out.println("ì—°ê²°ì‹¤íŒ¨");
+			e.printStackTrace();
+			System.out.println("¿¬°á½ÇÆÐ");
 		}
 		return conn;
 	}
 
-	// Resource í•´ì œí•˜ëŠ” disconnect
+	// Resource ÇØÁ¦ÇÏ´Â disconnect
 	public void disconnect() {
 		try {
 			if(rs != null) rs.close();

@@ -5,16 +5,19 @@ import java.util.List;
 import co.edu.board.BoardVO;
 
 public interface BoardService {
-	// ê¸°ëŠ¥ë§Œ ì •ì˜.
-	// ì…ë ¥.
+	// ê¸°ëŠ¥ë§? ? •?˜.
+	// ?…? ¥.
 	public BoardVO insertBoard(BoardVO vo);
-	//
+
 	public List<BoardVO> getList(BoardVO vo);
-	// í•œê±´ì¡°íšŒ.
+
 	public BoardVO findBoard(int boardNo);
-	// ìˆ˜ì •.
-	public boolean updateBoard(BoardVO vo); // ë‹¤ì–‘í•˜ê²Œ ì¨ë³´ê¸°ìœ„í•´ booleanë„ ì¨ë´„.
-	// ì‚­ì œ.
+
+	public boolean updateBoard(BoardVO vo); // ?‹¤?–‘?•˜ê²? ?¨ë³´ê¸°?œ„?•´ boolean?„ ?¨ë´?.
+
 	public boolean deleteBoard(int boardNo);
+	
+	// ÆäÀÌÁö.
+	public List<BoardVO> pageList(int page);
 
 }

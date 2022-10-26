@@ -2,6 +2,8 @@ package co.edu.service;
 
 import java.util.List;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+
 import co.edu.board.BoardVO;
 import co.edu.dao.BoardDAO;
 
@@ -12,28 +14,32 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public BoardVO insertBoard(BoardVO vo) {
-		return null;
+		return dao.insertBoard(vo);
 	}
 
 	@Override
 	public List<BoardVO> getList(BoardVO vo) {
-
-		return null;
+		return 	dao.boardList(vo);
 	}
 
 	@Override
 	public BoardVO findBoard(int boardNo) {
-		return null;
+		return dao.serachBoard(boardNo);
 	}
 
 	@Override
 	public boolean updateBoard(BoardVO vo) {
-		return false;
+		return dao.updateBoard(vo);
 	}
 
 	@Override
 	public boolean deleteBoard(int boardNo) {
-		return false;
+		return dao.deleteBoard(boardNo);
+	}
+
+	@Override
+	public List<BoardVO> pageList(int page) {
+		return dao.pageList(page);
 	}
 	
 }
