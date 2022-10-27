@@ -20,7 +20,7 @@ public class BulletinControl implements Control {
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String page = req.getParameter("page");
-		page = page == null ? "1" : page;
+		page = page == null ? "1" : page; //삼항연산자
 		int pg = Integer.parseInt(page);
 		
 		PageVO paging = new PageVO(259, pg);
