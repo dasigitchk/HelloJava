@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.board.BoardVO;
+import co.edu.board.MemberVO;
 import co.edu.common.DAO;
 
 public class BoardDAO extends DAO {
-	// ?…? ¥,ì¡°íšŒ,?ˆ˜? •,?‚­? œ...
+	// ?ï¿½ï¿½?ï¿½ï¿½,ì¡°íšŒ,?ï¿½ï¿½?ï¿½ï¿½,?ï¿½ï¿½?ï¿½ï¿½...
 	public BoardVO insertBoard(BoardVO vo) {
-		// ?…? ¥ì²˜ë¦¬ì¤‘ì— ?—?Ÿ¬ê°? ë°œìƒ?•˜ë©? null
+		// ?ï¿½ï¿½?ï¿½ï¿½ì²˜ë¦¬ì¤‘ì— ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ë°œìƒ?ï¿½ï¿½ï¿½? null
 		getConnect();
 		String sql = "select board_seq.nextval from dual";
 		String sql2 = "insert into tbl_board (board_no, title, content, writer, image) "
@@ -42,7 +43,7 @@ public class BoardDAO extends DAO {
 		} finally {
 			disconnect();
 		}
-		return null; //  ?‹¤?Œ¨?•  ê²½ìš°?—?Š” null?„ ë°˜í™˜.
+		return null; //  ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ê²½ìš°?ï¿½ï¿½?ï¿½ï¿½ null?ï¿½ï¿½ ë°˜í™˜.
 	}
 
 	public BoardVO serachBoard(int boardNo) {
@@ -140,10 +141,10 @@ public class BoardDAO extends DAO {
 			e.printStackTrace();
 		}
 		return false;
-		// ì²˜ë¦¬ê±´ìˆ˜ê°? 0?´ë©? false
+		// ì²˜ë¦¬ê±´ìˆ˜ï¿½? 0?ï¿½ï¿½ï¿½? false
 	}
 	
-	//ÆäÀÌÁö. ÀüÃ¼°Ç¼ö/ 10°³¾¿, °Ë»ö°á°ú ÀüÃ¼°Ç¼ö/10°³¾¿,
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½Ã¼ï¿½Ç¼ï¿½/ 10ï¿½ï¿½ï¿½ï¿½, ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½Ç¼ï¿½/10ï¿½ï¿½ï¿½ï¿½,
 	public int totalCnt() {
 		getConnect();
 		String sql = "select count(1) from tbl_board";
@@ -201,5 +202,75 @@ public class BoardDAO extends DAO {
 		}
 		return list;
 		} 
+	
+	public MemberVO insertMember(MemberVO vo) {
+		// 
+		getConnect();
+		String sql = "insert into members (id, passwd, name, email, resposibility) "
+				+ "values(?, ?, ?, ?, ?)";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getId());
+			psmt.setString(2, vo.getPasswd());
+			psmt.setString(3, vo.getName());
+			psmt.setString(4, vo.getEmail());
+			psmt.setString(5,"user");
+			int r= psmt.executeUpdate();
+			return vo;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return null;
 	}
+	
+	public List<MemberVO> MemberList(){
+		List<MemberVO> list = new ArrayList<>();
+		getConnect();
+		String sql = "select * from members";
+		
 
+		try {
+			psmt =conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				MemberVO vo = new MemberVO();
+				vo.setId(rs.getString("id"));
+				vo.setPasswd(rs.getString("passwd"));
+				vo.setName(rs.getString("name"));
+				vo.setEmail(rs.getString("email"));
+				
+				list.add(vo);
+				
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return list;
+		
+	}
+	
+	public String signIn(String id, String passwd) {
+		getConnect();
+		String sql = "select id from members where id = ? and passwd = ?";
+		
+		try {
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			psmt.setString(2, passwd);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				return id;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+
+		return null;
+		
+	}
+	}

@@ -22,14 +22,14 @@ public class WriteBoard implements Control {
 		String saveDir = req.getServletContext().getRealPath("upload");
 		System.out.println(saveDir);
 		String encod = "UTF-8";
-		int maxSize = 5 * 1024 * 1024; // 5 ¸Þ°¡ Á¦ÇÑ.
+		int maxSize = 5 * 1024 * 1024; // 5
 		
 		MultipartRequest mr = new MultipartRequest(//
-				req, // ¿äÃ»Á¤º¸.
-				saveDir, // ÀúÀåÀ§Ä¡.
-				maxSize, // ÆÄÀÏÅ©±â.
-				encod, //ÀÎÄÚµù.
-				new DefaultFileRenamePolicy() // ¸®³×ÀÓ Á¤Ã¥. ¶È°°ÀºÆÄÀÏÀÌÀÖÀ¸¸é ´Ù¸¥ÀÌ¸§À¸·Î ¸¸µé°Ú´Ù?
+				req, // ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½.
+				saveDir, // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡.
+				maxSize, // ï¿½ï¿½ï¿½ï¿½Å©ï¿½ï¿½.
+				encod, //ï¿½ï¿½ï¿½Úµï¿½.
+				new DefaultFileRenamePolicy() // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¥. ï¿½È°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ú´ï¿½?
 		);
 		
 		String title = mr.getParameter("title");
@@ -37,7 +37,7 @@ public class WriteBoard implements Control {
 		String writer = mr.getParameter("writer");
 		String image = mr.getFilesystemName("image");
 		
-		// DB ÀÔ·Â.
+		// DB ï¿½Ô·ï¿½.
 		BoardService service = new BoardServiceImpl();
 		service.insertBoard(new BoardVO(0, title, content, writer, null, 0, image));
 		

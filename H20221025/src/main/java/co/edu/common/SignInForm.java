@@ -1,4 +1,4 @@
-package co.edu.control;
+package co.edu.common;
 
 import java.io.IOException;
 
@@ -6,13 +6,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import co.edu.common.Control;
-import co.edu.common.HttpUtil;
-
-public class MainControl implements Control {
+public class SignInForm implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpUtil.forward(req, resp, "template/home.tiles"); //member������ member.jsp ����
+		HttpUtil.forward(req, resp, "member/signInForm.tiles");
 	}
+
 }

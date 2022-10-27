@@ -14,6 +14,37 @@
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="css/styles.css" rel="stylesheet" />
+<style>
+		.pagination {
+	  display: inline-block;
+	}
+	
+	.pagination a {
+	  color: black;
+	  float: left;
+	  padding: 8px 16px;
+	  text-decoration: none;
+	  border: 1px solid #ddd;
+	}
+	
+	.pagination a.active {
+	  background-color: #4CAF50;
+	  color: white;
+	  border: 1px solid #4CAF50;
+	}
+	
+	.pagination a:hover:not(.active) {background-color: #ddd;}
+	
+	.pagination a:first-child {
+	  border-top-left-radius: 5px;
+	  border-bottom-left-radius: 5px;
+	}
+	
+	.pagination a:last-child {
+	  border-top-right-radius: 5px;
+	  border-bottom-right-radius: 5px;
+	}
+</style>
 </head>
 <body>
 	<div class="d-flex" id="wrapper">

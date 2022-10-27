@@ -12,7 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import co.edu.control.BulletinControl;
 import co.edu.control.MainControl;
+import co.edu.control.MemberList;
 import co.edu.control.SearchBoard;
+import co.edu.control.SignIn;
+import co.edu.control.SignUp;
+import co.edu.control.SignUpForm;
 import co.edu.control.WriteBoard;
 import co.edu.control.WriteForm;
 
@@ -30,7 +34,7 @@ public class FrontController extends HttpServlet {
 //	}
 //	
 	
-	// ¼­¹ö½ÃÀÛ½Ã ÇÑ¹ø¸¸ ½ÇÇàµÊ.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û½ï¿½ ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		charset = config.getInitParameter("charset");
@@ -41,19 +45,30 @@ public class FrontController extends HttpServlet {
 		controlList.put("/searchBoard.do", new SearchBoard());
 		controlList.put("/writeBoardForm.do", new WriteForm());
 		controlList.put("/writeBoard.do", new WriteBoard());
+		
+		// íšŒì›ê°€ìž….
+		controlList.put("/signUpForm.do", new SignUpForm()); //íšŒì›ê°€ìž…í™”ë©´.
+		controlList.put("/signUp.do", new SignUp());
+		controlList.put("/memberList.do", new MemberList());//íšŒì›ê°€ìž… ì²˜ë¦¬ => íšŒì›ê°€ìž…ë˜ì—ˆìŠµë‹ˆë‹¤. 
+		
+		controlList.put("/signInForm.do", new SignInForm());
+		controlList.put("/signIn.do", new SignIn());
 	}
 
 	// service()
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String uri = req.getRequestURI(); // http://localhost:8081/H20221025/main.do  ~8081¸¦ Á¦¿ÜÇÏ°í  /H29221025/main.do¸¦ ºÒ·¯¿À´Â°Ô uri?ž„.
-		String context = req.getContextPath(); // H20221025°¡ path?
+		req.setCharacterEncoding(charset); // í•œê¸€ì²˜ë¦¬.
+		resp.setCharacterEncoding(charset); //í•œê¸€.
+		String uri = req.getRequestURI(); // http://localhost:8081/H20221025/main.do  ~8081ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½  /H29221025/main.doï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½Â°ï¿½ uri?ï¿½ï¿½.
+		String context = req.getContextPath(); // H20221025ï¿½ï¿½ path?
 		String path = uri.substring(context.length());
 		
 		System.out.println(path);
 		Control subControl = controlList.get(path);
-		subControl.exec(req, resp); //main.do È£Ãâ => control½ÇÇà
+		
+		subControl.exec(req, resp); //main.do È£ï¿½ï¿½ => controlï¿½ï¿½ï¿½ï¿½
 	}
 }
 

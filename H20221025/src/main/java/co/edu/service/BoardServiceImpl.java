@@ -5,6 +5,7 @@ import java.util.List;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
 import co.edu.board.BoardVO;
+import co.edu.board.MemberVO;
 import co.edu.dao.BoardDAO;
 
 public class BoardServiceImpl implements BoardService{
@@ -41,5 +42,20 @@ public class BoardServiceImpl implements BoardService{
 	public List<BoardVO> pageList(int page) {
 		return dao.pageList(page);
 	}
+
+	@Override
+	public MemberVO insertMember(MemberVO vo) {
+
+		return dao.insertMember(vo);
+	}
+	@Override
+	public List<MemberVO> memberList() {
+		return dao.MemberList();
+	}
+	@Override
+	public String signIn(String id, String password) {
+		return dao.signIn(id, password);
+	}
+
 	
 }

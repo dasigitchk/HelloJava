@@ -3,21 +3,31 @@ package co.edu.service;
 import java.util.List;
 
 import co.edu.board.BoardVO;
+import co.edu.board.MemberVO;
 
 public interface BoardService {
-	// ê¸°ëŠ¥ë§? ? •?˜.
-	// ?…? ¥.
+	// ê¸°ëŠ¥ï¿½? ?ï¿½ï¿½?ï¿½ï¿½.
+	// ?ï¿½ï¿½?ï¿½ï¿½.
 	public BoardVO insertBoard(BoardVO vo);
 
 	public List<BoardVO> getList(BoardVO vo);
 
 	public BoardVO findBoard(int boardNo);
 
-	public boolean updateBoard(BoardVO vo); // ?‹¤?–‘?•˜ê²? ?¨ë³´ê¸°?œ„?•´ boolean?„ ?¨ë´?.
+	public boolean updateBoard(BoardVO vo); // ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½ë³´ê¸°?ï¿½ï¿½?ï¿½ï¿½ boolean?ï¿½ï¿½ ?ï¿½ï¿½ï¿½?.
 
 	public boolean deleteBoard(int boardNo);
 	
-	// ÆäÀÌÁö.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 	public List<BoardVO> pageList(int page);
+	
+	//íšŒì›ê°€ì….
+	public MemberVO insertMember(MemberVO vo);
+	
+	// íšŒì›ëª©ë¡.
+	public List<MemberVO> memberList();
+	
+	// ë¡œê·¸ì¸.
+	public String signIn(String id, String password);
 
 }

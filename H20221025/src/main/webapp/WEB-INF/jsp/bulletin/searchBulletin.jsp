@@ -13,20 +13,22 @@
 %>
 	<table border='1'>
 		<tr>
-			<th>글번호</th><td><%=result.getBoardNo() %></td><th>작성자</th><td><%=result.getWriter() %></td>
+			<th>글번호</th><td>${board.boardNo }</td><th>작성자</th><td>${board.writer}</td>
 		</tr>
 		<tr>
-			<th>제목</th><td><%=result.getTitle() %></td>
+			<th>제목</th><td>${board.title }</td>
 		</tr>
 		<tr>
 			<td colspan='2'>
-			<textarea row=5 cols=30>
-				<%=result.getContent() %>
+			<textarea row='5' cols='40'>${board.content }
 			</textarea>
+			</td>
+			<td>
+				<img src="upload/${board.image }" alt="" style="width:200px;">
 			</td>
 		</tr>
 		<tr>
-			<th>작성일자</th><td><%=result.getWriteDate() %></td><th>조회수</th><td><%=result.getClickCnt() %></td>
+			<th>작성일자</th><td>${board.writeDate }</td><th>조회수</th><td><%=result.getClickCnt() %></td>
 		</tr>
 	</table>
 </body>

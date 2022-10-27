@@ -10,12 +10,12 @@
 					class="list-group-item list-group-item-action list-group-item-light p-3"
 					href="writeBoardForm.do">글등록</a> <a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">Overview</a> <a
+					href="signUpForm.do">회원가입</a> <a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">Events</a> <a
+					href="memberList.do">회원목록</a> <a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">Profile</a> <a
+					href="signInForm.do">로그인</a> <a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">Status</a>
+					href="signOut.do">로그아웃</a>
 			</div>
 		</div>
