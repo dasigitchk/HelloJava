@@ -29,5 +29,8 @@ public interface BoardService {
 	
 	// 로그인.
 	public String signIn(String id, String password);
+	
+	//비밀번호메일전송
+	public String passwdReConfrim(String id);
 
 }

@@ -57,5 +57,11 @@ public class BoardServiceImpl implements BoardService{
 		return dao.signIn(id, password);
 	}
 
+	@Override
+	public String passwdReConfrim(String id) {
+	
+		return dao.sendMail(id);
+	}
+
 	
 }

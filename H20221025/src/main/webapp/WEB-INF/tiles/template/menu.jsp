@@ -8,7 +8,7 @@
 			</c:if>
 			<c:if test="${sessionScope.id == null }">
 			<h3>손님</h3>
-			</c:if>>
+			</c:if>
 			</div>
 			<div class="list-group list-group-flush">
 				<a

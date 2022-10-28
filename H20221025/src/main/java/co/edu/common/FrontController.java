@@ -15,10 +15,14 @@ import co.edu.control.MainControl;
 import co.edu.control.MemberList;
 import co.edu.control.SearchBoard;
 import co.edu.control.SignIn;
+import co.edu.control.SignInForm;
+import co.edu.control.SignOut;
 import co.edu.control.SignUp;
 import co.edu.control.SignUpForm;
 import co.edu.control.WriteBoard;
 import co.edu.control.WriteForm;
+import co.edu.control.passwdReConfirm;
+import co.edu.control.passwdReConfirmForm;
 
 public class FrontController extends HttpServlet {
 
@@ -53,7 +57,13 @@ public class FrontController extends HttpServlet {
 		
 		controlList.put("/signInForm.do", new SignInForm());
 		controlList.put("/signIn.do", new SignIn());
-	}
+		controlList.put("/signOut.do", new SignOut());
+		
+		//비밀번호 재전송
+		controlList.put("/passwdReConfirmForm.do", new passwdReConfirmForm());
+		controlList.put("/passwdReConfirm.do", new passwdReConfirm());
+		
+}
 
 	// service()
 	@Override
@@ -69,6 +79,6 @@ public class FrontController extends HttpServlet {
 		Control subControl = controlList.get(path);
 		
 		subControl.exec(req, resp); //main.do ȣ�� => control����
-	}
-}
+	} 
+} //end of class
 

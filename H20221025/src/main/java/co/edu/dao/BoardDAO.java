@@ -7,9 +7,11 @@ import java.util.List;
 import co.edu.board.BoardVO;
 import co.edu.board.MemberVO;
 import co.edu.common.DAO;
+import co.edu.control.SendMail;
 
 public class BoardDAO extends DAO {
 	// ?��?��,조회,?��?��,?��?��...
+	SendMail mail = new SendMail();
 	public BoardVO insertBoard(BoardVO vo) {
 		// ?��?��처리중에 ?��?���? 발생?���? null
 		getConnect();
@@ -252,6 +254,7 @@ public class BoardDAO extends DAO {
 		
 	}
 	
+	//로그인
 	public String signIn(String id, String passwd) {
 		getConnect();
 		String sql = "select id from members where id = ? and passwd = ?";
@@ -273,4 +276,26 @@ public class BoardDAO extends DAO {
 		return null;
 		
 	}
+	
+	//비밀번호메일발송
+	public String sendMail(String id) {
+		String sql = "select (email, passwd) from members where id = ? ";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				mail.sendMail("pokemdn@naver.com", rs.getString("email"), "비밀번호재전송",rs.getString("passwd"));
+			}
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			disconnect();
+		}
+		return null;
 	}
+}
