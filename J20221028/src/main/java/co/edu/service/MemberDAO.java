@@ -2,12 +2,58 @@ package co.edu.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import co.edu.common.DAO;
 import co.edu.member.MemberVO;
 
 public class MemberDAO extends DAO {
+	
+	//전체스케줄 목록.
+	public List scheduleList() {
+		getConnect();
+		String sql = "select * from full_calender";
+		List list = new ArrayList();
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs= psmt.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getString(1));
+				list.add(rs.getString(2));
+				list.add(rs.getString(3));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+		
+	}
+	
+	// 부서명, 부서인원.
+	public Map<String, Integer> getEmpByDept() {
+		getConnect();
+		Map<String, Integer> map = new  HashMap<>();
+		String sql = "select d.department_name, count(1)\r\n"
+				+ "from hr.employees e\r\n"
+				+ "join hr.departments d\r\n"
+				+ "on e.department_id = d.department_id\r\n"
+				+ "group by d.department_name";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				map.put(rs.getString(1), rs.getInt(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return map;
+	}
 	
 	// 한건삭제.
 	public boolean deleteMember(String id) {
