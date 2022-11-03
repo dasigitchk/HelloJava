@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        td:first-child {
+            color: red;
+        }
+        td:last-child:not( tr:last-child > td:last-child ) {
+            color: blue;
+        }
+       
+
+    </style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+    let obj = {
+        id:'hong',
+        age: 20
+        }
+        obj = {}; //new Object();
+        let ary = [] // new Array();
+        let today = new Date();
+        //getFullYear , getMonth
+        document.addEventListener('DOMContentLoaded', function() {
+            //오늘날짜의 요일 리턴.
+            today = new Date(2022, 10, 1);
+            let thisDay = today.getDay();
+            let thisYear = today.getFullYear();
+            let thisMonth = today.getMonth();
+            let lastDate = new Date(thisYear, thisMonth+1, 0)
+            console.log(thisDay) //숫자가 리턴됨. 일요일부터 0 월= 1 화= 2 ....
+            let table = document.createElement('table');
+            table.setAttribute('border', '1');
+
+            let tbody = document.createElement('tbody');
+            let tr = document.createElement('tr');
+            tbody.append(tr);
+            let td = document.createElement('td');
+            // 요일지정.
+            for(let i=0; i < thisDay; i++){
+                 td = document.createElement('td');
+                tr.append(td);
+            }
+            for(let i=1; i<=lastDate.getDate(); i++) {
+                let td = document.createElement('td');
+                td.textContent = i;
+                tr.append(td);
+                if((i+thisDay) % 7 == 0) {
+                    tr = document.createElement('tr');
+                    tbody.append(tr);
+                }
+            }
+            table.append(tbody)
+            document.getElementById('show').append(table);
+        })
+</script>
+</head>
+<body>
+        <div id="show"></div>
+</body>
+</html>
