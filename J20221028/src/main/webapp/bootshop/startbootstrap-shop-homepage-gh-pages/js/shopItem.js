@@ -17,12 +17,12 @@ function makeItemDiv(item = {}) {
     good.querySelector('h5').textContent = item.itemName;
     good.querySelector('span.text-muted').textContent = item.originPrice;
   
-    let cnt;
+
     // add to cart 누르면 카트에 숫자증가.
     good.querySelector('a.btn').addEventListener('click', addCart);
     function addCart() {
-    let num = Number(document.querySelector('nav.navbar>div>div>form>button>span.badge').textContent)+1;
-    document.querySelector('nav.navbar>div>div>form>button>span.badge').textContent = num;
+  	 let num = Number(document.querySelector('nav.navbar>div>div>form>button>span.badge').textContent)+1;
+  	 document.querySelector('nav.navbar>div>div>form>button>span.badge').textContent = num;
     }   
     
     //.nextSibling은 그 다음의 어떤것이든 가져옴?

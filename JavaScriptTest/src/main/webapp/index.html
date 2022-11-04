@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="java/book.js"></script>
+	<style>
+		body {
+			width: 800px;
+			border: 1px solid black;
+			margin: auto;
+			padding: 10px;
+		}
+
+		ul {
+			list-style: none;
+		}
+
+		li {
+			margin-top: 5px;
+			float: left;
+			text-align: center;
+		}
+
+		input {
+			width: 350px;
+			margin-top: 5px;
+			float: right;
+		}
+
+		#titles {
+			float: left;
+			width: 600px;
+			height: 169px;
+		}
+
+		#buttons {
+			float: right;
+			width: 200px;
+			text-align: center;
+			padding: 50px 0;
+		}
+	</style>
+</head>
+
+<body>
+<hr>
+	<form action="">
+		<div id="titles">
+			<ul>
+				<li>도서코드</li><input type="text" id="bookCode">
+				<li>도서명</li><input type="text" id="bookName">
+				<li>저자</li><input type="text" id="author">
+				<li>출판사</li><input type="text" id="press">
+				<li>금액</li><input type="number" id="price">
+			</ul>
+		</div>
+		<div id="buttons">
+			<button type="button" id="insert">저장</button><br><br>
+			<button type="button" id="reset">삭제</button>
+		</div>
+	</form>
+	<div id="show">
+		
+	</div>
+</body>
+	
+</html>
