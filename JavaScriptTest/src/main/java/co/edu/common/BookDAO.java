@@ -53,4 +53,22 @@ public class BookDAO  extends DAO{
 			disconnect();
 		}
 	}
+	
+	//도서삭제
+	public boolean deleteBook(String bc) {
+	getConnect();
+	String sql = "delete from tbl_book where book_code = ? ";
+	try {
+		psmt = conn.prepareStatement(sql);
+		psmt.setString(1, bc);
+		int r =  psmt.executeUpdate();
+		if(r > 0)
+			return true;
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		disconnect();
+	}
+	return false;
+}
 }
