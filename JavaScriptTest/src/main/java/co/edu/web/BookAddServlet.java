@@ -42,7 +42,7 @@ public class BookAddServlet extends HttpServlet {
 		String ba = request.getParameter("author");
 		String bp = request.getParameter("press");
 		String bpr = request.getParameter("price");
-		
+		System.out.println(bpr);
 		BookVO vo = new BookVO();
 		vo.setBookCode(bc);
 		vo.setBookName(bn);

@@ -12,55 +12,55 @@
 			margin: auto;
 			padding: 10px;
 		}
-
+		#header {
+			display: inline-block;
+			width: 400px;
+		}
 		ul {
+			width: 550px;
+			height: 200px;
+			float: left;
 			list-style: none;
 		}
-
-		li {
-			margin-top: 5px;
-			float: left;
+		p {
+			background-color: skyblue;
 			text-align: center;
 		}
-
-		input {
-			width: 350px;
-			margin-top: 5px;
+		p>input{
+			width: 400px;
 			float: right;
 		}
-
-		#titles {
-			float: left;
-			width: 600px;
-			height: 169px;
-		}
-
 		#buttons {
 			float: right;
 			width: 200px;
 			text-align: center;
 			padding: 50px 0;
 		}
+		#show {
+			width: 800px;
+			border: 1px solid black;
+			margin-top: 10px;
+		}
+		#show>table{
+			margin: 0 auto;
+		}
 	</style>
-</head>
-
 <body>
 <hr>
-	<form action="">
-		<div id="titles">
-			<ul>
-				<li>도서코드</li><input type="text" id="bookCode">
-				<li>도서명</li><input type="text" id="bookName">
-				<li>저자</li><input type="text" id="author">
-				<li>출판사</li><input type="text" id="press">
-				<li>금액</li><input type="number" id="price">
-			</ul>
-		</div>
+<div id="header">
+	<ul>
+		<p>도서코드 <input type="text" id="bookCode"></p>
+		<p>도서명 <input type="text" id="bookName"></p>
+		<p>저자 <input type="text" id="author"></p>
+		<p>출판사 <input type="text" id="press"></p>
+		<p>가격 <input type="text" id="price"></p>
+	</ul>
+</div>
 		<div id="buttons">
 			<button type="button" id="insert">저장</button><br><br>
 			<button type="button" id="reset">삭제</button>
 		</div>
-	</form>
+		<br>
 	<div id="show">
 		
 	</div>

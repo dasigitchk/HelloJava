@@ -17,7 +17,7 @@ document.querySelectorAll('button[type="button"]')[1].addEventListener('click', 
 
 ////////////////===function===/////////////////
 	function addFunc() {
-		consle.log('추가버튼....')
+		console.log('추가버튼....')
 		let code = document.getElementById('bookCode').value;
 		let name = document.getElementById('bookName').value;
 		let author = document.getElementById('author').value;
@@ -36,19 +36,19 @@ document.querySelectorAll('button[type="button"]')[1].addEventListener('click', 
 			price: price
 		}
 		document.querySelector('#show>table>tbody').appendChild(makeTr(newRow));
-		let data = '&bookCode='+code+'&bookName='+name+'&author='+author+'&press='+press +'&price='+price;
 		 //ajax 호출.
 		 fetch('./BookAddServlet', {
 					method: 'post',
 					headers: {
-						'Content-type': 'application/x-www-form-urlencoded'
+						'Content-type': 'application/json'
 					},
-					body: data
+					body: newRow
+			
 			 })
 			 	.then( result => result.json() )
 				.then(addCallback)
 				.catch(err => {
-					consol.log(err);
+					console.log(err);
 				});
 				return false;
 	};
@@ -58,11 +58,11 @@ document.querySelectorAll('button[type="button"]')[1].addEventListener('click', 
 			document.querySelector('#list').append(makeTr(result));
 
 			// 화면입력초기화.
-			document.getElementById('#bookCode').value = '';
-			document.querySelector('#BookName').value = '';
-			document.querySelector('#author').value = '';
-			document.querySelector('#press').value = '';
-			document.querySelector('#price').value = '';
+			document.getElementById('bookCode').value = "";
+			document.getElementById('bookName').value = "";
+			document.getElementById('author').value = "";
+			document.getElementById('press').value = "";
+			document.getElementById('price').value = "";
 		}
 	
 	function delFunc() {
@@ -94,8 +94,8 @@ document.querySelectorAll('button[type="button"]')[1].addEventListener('click', 
 			check.checked = checkbox.checked;
 		});
 	});
-	td.prepend(checkbox);
-	tr.appendChild(td);
+	td.appendChild(checkbox);
+	tr.prepend(td);
 
 	thead.appendChild(tr);
 	table.appendChild(thead);
@@ -139,7 +139,7 @@ function makeTr(row) {
 		});
 		check.setAttribute('type', 'checkbox');
 		td.appendChild(check);
-		tr.appendChild(td);
+		tr.prepend(td);
 
 		return tr;
 	}

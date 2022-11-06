@@ -37,7 +37,7 @@ public class BookDAO  extends DAO{
 	//도서등록.
 	public void addBook(BookVO vo) {
 		getConnect();
-		String sql = "insert into tbl_book "
+		String sql = "insert into tbl_book (book_code, book_name, author, press, price) "
 				+ "values(?, ?, ?, ?, ?)";
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -46,6 +46,7 @@ public class BookDAO  extends DAO{
 			psmt.setString(3, vo.getAuthor());
 			psmt.setString(4, vo.getPress());
 			psmt.setInt(5, vo.getPrice());
+			int r = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
