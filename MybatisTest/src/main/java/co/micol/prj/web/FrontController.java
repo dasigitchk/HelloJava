@@ -14,6 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import co.micol.prj.book.command.BookList;
 import co.micol.prj.common.Command;
 import co.micol.prj.main.MainCommand;
+import co.micol.prj.member.command.AjaxIdCheck;
+import co.micol.prj.member.command.Logout;
+import co.micol.prj.member.command.MemberJoin;
+import co.micol.prj.member.command.MemberJoinForm;
+import co.micol.prj.member.command.MemberLogin;
+import co.micol.prj.member.command.MemberLoginForm;
 
 /**
  * 모든요청을 받아들이는 컨트롤러
@@ -30,8 +36,14 @@ public class FrontController extends HttpServlet {
     //요청한 것을 실행하는 명령을 모아 두는 곳.
 	public void init(ServletConfig config) throws ServletException {
 		map.put("/main.do", new MainCommand()); //처음 보여줄 페이지 명령.
-		map.put("/bookList.do", new BookList());
-	}
+		map.put("/bookList.do", new BookList()); //책목록보기
+		map.put("/memberLoginForm.do", new MemberLoginForm()); //로그인 폼 호출
+		map.put("/memberLogin.do", new MemberLogin()); // 멤버로그인 처리.
+		map.put("/logout.do", new Logout());
+		map.put("/memberJoinForm.do", new MemberJoinForm());
+		map.put("/ajaxIdCheck.do", new AjaxIdCheck()); //ajax를 이용한 아이디 중복체크)
+		map.put("/memberJoin.do", new MemberJoin()); // 회원가입
+	}	
 	
 	//요청을 분석하고 실행, 결과를 돌려주는 곳
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,8 +60,15 @@ public class FrontController extends HttpServlet {
 		//viewReslove 파트
 		if(!viewPage.endsWith(".do") && viewPage != null) { //문자열의 마지막이 .do가 아니고 null이 아니면..
 			//ajax(요청한페이지에 결과를 주는것) 처리.
+			if(viewPage.startsWith("ajax:")) {
+				response.setContentType("text/html; charset=UTF-8");
+				response.getWriter().append(viewPage.substring(5));
+				return;
+			}
 			// 타일즈 돌아가는곳.(if!변수명.endswith(".tiles")
-			viewPage = "/WEB-INF/views/" + viewPage + ".jsp"; //여기는 서버이기때문에 WEB-INF안의 페이지에 접근가능.
+			if(!viewPage.endsWith(".tiles")) {
+				viewPage = "/WEB-INF/views/" + viewPage + ".jsp"; // 타일즈를 안태움.	
+			}	
 			RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 			dispatcher.forward(request, response); // request 객체에 값을 다시 전달해줌. 내가가진값을 전달해주는게 dispatcher
 		} else {

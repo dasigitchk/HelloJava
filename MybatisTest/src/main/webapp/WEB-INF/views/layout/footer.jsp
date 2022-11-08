@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div align="center">
-	<h1>WellCome to My WebSite</h1>
-</div>
+	<h1>예담 1강의실 입니다.</h1>
 </body>
 </html>
