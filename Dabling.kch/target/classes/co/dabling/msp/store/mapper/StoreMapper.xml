@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.micol.prj.book.mapper.BookMapper">
+	<select id="storeSelectList" resultType="co.dabling.msp.members.vo.StoreVO">
+		SELECT * FROM STORES  ORDER BY STORE_CODE DESC
+	</select>
+	
+	<select id="storeSelect" resultType="co.dabling.msp.members.vo.StoreVO">
+		SELECT * FROM  STORES
+		WHERE STORE_CODE = #{storeCode}
+	</select>
+		
+	<update id="storeUpdate" parameterType="co.dabling.msp.members.vo.StoreVO">
+	 	UPDATE stores
+	 	SET EMAIL = #{email},
+	 		PASSWORD = #{password},
+	 		NAME = #{name},
+	 		PHONE = #{phone}
+	 	WHERE STORE_CODE = #{memberCode}
+	</update>
+	
+	<delete id="storeDelete" parameterType="co.dabling.msp.members.vo.StoreVO">
+	 	DELETE FROM STORES
+	 	WHERE STORE_CODE = #{storeCode}
+	</delete>
+</mapper>
