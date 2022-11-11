@@ -23,5 +23,4 @@ public class BookList implements Command {
 		
 		return "book/bookList";
 	}
-
 }
